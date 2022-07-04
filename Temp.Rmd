@@ -1,0 +1,140 @@
+---
+title: "Temperature"
+output: html_document
+date: '2022-07-03'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+library(ggthemes)
+library(readxl)
+library(dbplyr)
+library(janitor)
+library(data.table)
+```
+
+```{r}
+#Setting up the Data
+
+WN<-read_xlsx(path="WestNile.xlsx",
+           sheet=1,) |> 
+  clean_names() |>
+  filter(state%in%c("National","California","Texas","Colorado","Nebraska","Illinois"))
+
+Temp<-read_xlsx(path="WestNile.xlsx",
+           sheet=2) |> 
+  clean_names() |> 
+  filter(state%in%c("National","California","Texas","Colorado","Nebraska","Illinois"))
+
+WNdf<-as.data.frame(t(WN)) |>
+  slice(2:24)
+Tempdf<-as.data.frame(t(Temp)) |> 
+  slice(2:24)
+colnames(WNdf)<-c("California","Colorado","Illinois","Nebraska","Texas","National")
+colnames(Tempdf)<-c("California","Colorado","Illinois","Nebraska","Texas","National")
+
+WN
+Temp
+WNdf
+Tempdf
+```
+
+```{r}
+#Cleaning the Data
+
+data<-full_join(WN,Temp)
+clean_data<-transpose(data) |> 
+  slice(2:24) |> 
+  mutate("Year"=c(1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,
+                  2016,2017,2018,2019,2020,"Total"))
+
+colnames(clean_data)<-c("California","Colorado","Illinois","Nebraska","Texas","National",
+                        "CaliforniaT","ColoradoT","IllinoisT","NebraskaT","TexasT",
+                        "NationalT","Year")
+clean_data$California<-as.double(clean_data$California)
+clean_data$Colorado<-as.double(clean_data$Colorado)
+clean_data$Illinois<-as.double(clean_data$Illinois)
+clean_data$Nebraska<-as.double(clean_data$Nebraska)
+clean_data$Texas<-as.double(clean_data$Texas)
+clean_data$National<-as.double(clean_data$National)
+clean_data$`CaliforniaT`<-as.double(clean_data$`CaliforniaT`)
+clean_data$`ColoradoT`<-as.double(clean_data$`ColoradoT`)
+clean_data$`IllinoisT`<-as.double(clean_data$`IllinoisT`)
+clean_data$`NebraskaT`<-as.double(clean_data$`NebraskaT`)
+clean_data$`TexasT`<-as.double(clean_data$`TexasT`)
+clean_data$`NationalT`<-as.double(clean_data$`NationalT`)
+
+clean_data[,c(13,1,2,3,4,5,6,7,8,9,10,11,12)] 
+```
+
+```{r}
+#California Plot
+
+clean_data |>  
+  filter(Year!="Total") |> 
+  ggplot(aes(x=CaliforniaT,y=California))+
+  geom_point()+
+  geom_smooth(method="lm",
+              formula=y~x,
+              se=FALSE)+
+  theme_classic()+
+  labs(title="Annual Average Temperatures in California vs \nNumber of West Nile Cases in California",
+       subtitle="There is a positive correlation between increasing temeprature and higher case numbers\n
+       however it is quite weak",
+       x="Temperature (F)",
+       y="Number of West Nile Disease Cases")
+```
+```{r}
+#Colorado Plot
+
+clean_data |>  
+  filter(Year!="Total") |> 
+  ggplot(aes(x=ColoradoT,y=Colorado))+
+  geom_point()+
+  geom_smooth(method="lm",
+              formula=y~x,
+              se=FALSE)+
+  theme_classic()+
+  labs(title="Annual Average Temperatures in California vs \nNumber of West Nile Cases in California",
+       subtitle="There is a positive correlation between increasing temeprature and higher case numbers\n
+       however it is quite weak",
+       x="Temperature (F)",
+       y="Number of West Nile Disease Cases")
+```
+```{r}
+#Texas Plot
+
+clean_data |>  
+  filter(Year!="Total") |> 
+  ggplot(aes(x=TexasT,y=Texas))+
+  geom_point()+
+  geom_smooth(method="lm",
+              formula=y~x,
+              se=FALSE)+
+  theme_classic()+
+  labs(title="Annual Average Temperatures in California vs \nNumber of West Nile Cases in California",
+       subtitle="There is a positive correlation between increasing temeprature and higher case numbers\n
+       however it is quite weak",
+       x="Temperature (F)",
+       y="Number of West Nile Disease Cases")
+```
+```{r}
+#National Plot
+
+clean_data |>  
+  filter(Year!="Total") |> 
+  ggplot(aes(x=NationalT,y=National))+
+  geom_point()+
+  geom_smooth(method="lm",
+              formula=y~x,
+              se=FALSE)+
+  theme_classic()+
+  labs(title="Annual Average Temperatures in California vs \nNumber of West Nile Cases in California",
+       subtitle="There is a positive correlation between increasing temeprature and higher case numbers\n
+       however it is quite weak",
+       x="Temperature (F)",
+       y="Number of West Nile Disease Cases")
+```
+
