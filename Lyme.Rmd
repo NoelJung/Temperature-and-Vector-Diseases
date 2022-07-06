@@ -1,0 +1,153 @@
+---
+title: "Lyme Disease"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+library(ggthemes)
+library(readxl)
+library(dbplyr)
+library(janitor)
+library(data.table)
+library(usethis)
+library(distill)
+library(knitr)
+```
+
+```{r echo=FALSE}
+#Setting Up the Data
+
+Ly<-read_xlsx(path="WestNile.xlsx",
+           sheet=2,) |> 
+  clean_names() |> 
+  arrange(desc(total_confirmed)) |> 
+  filter(state%in%c("National","Pennsylvania","New Jersey","New York","Massachusetts","Wisconsin"))
+
+Temp<-read_xlsx(path="WestNile.xlsx",
+           sheet=3) |> 
+  clean_names() |> 
+  mutate(x2019_confirmed=x2019) |>
+  mutate(x2019_probable=x2019) |> 
+  filter(state%in%c("National","Pennsylvania","New Jersey","New York","Massachusetts","Wisconsin")) |> 
+  select(c(state,x2010,x2011,x2012,x2013,x2014,x2015,x2016,x2017,x2018,x2019_confirmed,x2019_probable))
+```
+
+```{r echo=FALSE}
+#Cleaning the Data
+
+data<-full_join(Ly,Temp,by = c("state", "x2010", "x2011", "x2012", "x2013", "x2014", "x2015", "x2016", "x2017", "x2018", "x2019_confirmed", "x2019_probable"))
+clean_data<-transpose(data) |> 
+  slice(2:14) |> 
+  mutate("Year"=c(2010,2011,2012,2013,2014,2015,2016,2017,2018,"2019_Confirmed","2019_Probable","Total_Confirmed","Total_Probable"))
+  
+
+colnames(clean_data)<-c("National","Pennsylvania","New_Jersy","New_York","Massachusetts","Wisconsin",
+                        "MassachusettsT","New_JerseyT","New_YorkT","PennsylvaniaT","WisconsinT","NationalT","Year")
+clean_data$National<-as.double(clean_data$National)
+clean_data$Pennsylvania<-as.double(clean_data$Pennsylvania)
+clean_data$New_Jersy<-as.double(clean_data$New_Jersy)
+clean_data$New_York<-as.double(clean_data$New_York)
+clean_data$Massachusetts<-as.double(clean_data$Massachusetts)
+clean_data$Wisconsin<-as.double(clean_data$Wisconsin)
+clean_data$MassachusettsT<-as.double(clean_data$MassachusettsT)
+clean_data$New_JerseyT<-as.double(clean_data$New_JerseyT)
+clean_data$New_YorkT<-as.double(clean_data$New_YorkT)
+clean_data$PennsylvaniaT<-as.double(clean_data$PennsylvaniaT)
+clean_data$WisconsinT<-as.double(clean_data$WisconsinT)
+clean_data$NationalT<-as.double(clean_data$NationalT)
+
+#data
+#clean_data
+```
+
+```{r echo=FALSE}
+#National Plot
+NatLy<-clean_data |> 
+  filter(!(Year%in%c("Total_Confirmed","Total_Probable","2019_Probable"))) |> 
+  ggplot(aes(x=NationalT,y=National))+ 
+  geom_point()+
+  geom_smooth(method="lm",
+              formula=y~x,
+              se=FALSE)+
+  theme_classic()+
+  labs(title="National Annual Average Temperatures vs \nNational Annual Number of Lyme Disease Cases",
+       subtitle="There is a slight positive correlation between temperature and Lyme Disease cases, \nhowever there is no significant relationship overall.",
+       x="Temperature (F)",
+       y="Number of Lyme Disease Cases",
+       caption="Source: CDC and NOAA")
+
+#ggsave("NatLy.png",plot=NatLy)
+```
+
+```{r echo=FALSE}
+#Pennsylvania
+
+PenLy<-clean_data |> 
+  filter(!(Year%in%c("Total_Confirmed","Total_Probable","2019_Probable"))) |> 
+  ggplot(aes(x=PennsylvaniaT,y=Pennsylvania))+ 
+  geom_point()+
+  geom_smooth(method="lm",
+              formula=y~x,
+              se=FALSE)+
+  theme_classic()+
+  labs(title="Annual Average Temperatures in Pennsylvania vs \nAnnual Number of West Nile Cases in Pennsylvania",
+       subtitle="There is no apparent correlation between temperature and Lyme Disease cases.",
+       x="Temperature (F)",
+       y="Number of Lyme Disease Cases",
+       caption="Source: CDC and NOAA")
+
+#ggsave("PenLy.png",plot=PenLy)
+```
+
+```{r echo=FALSE}
+#New Jersey
+
+NewJLy<-clean_data |> 
+  filter(!(Year%in%c("Total_Confirmed","Total_Probable","2019_Probable"))) |> 
+  ggplot(aes(x=New_JerseyT,y=New_Jersy))+ 
+  geom_point()+
+  geom_smooth(method="lm",
+              formula=y~x,
+              se=FALSE)+
+  theme_classic()+
+  labs(title="Annual Average Temperatures in New Jersey vs \nAnnual Number of Lyme Disease Cases in New Jersey",
+       subtitle="There is a positive correlation between temperature and Lyme Disease cases, \nhowever it is quite weak.",
+       x="Temperature (F)",
+       y="Number of Lyme Disease Cases",
+       caption="Source: CDC and NOAA")
+
+#ggsave("NewJLy.png",plot=NewJLy)
+```
+
+```{r echo=FALSE}
+#New York
+
+NewYLy<-clean_data |> 
+  filter(!(Year%in%c("Total_Confirmed","Total_Probable","2019_Probable"))) |> 
+  ggplot(aes(x=New_YorkT,y=New_York))+ 
+  geom_point()+
+  geom_smooth(method="lm",
+              formula=y~x,
+              se=FALSE)+
+  theme_classic()+
+  labs(title="Annual Average Temperatures in New York vs \nAnnual Number of Lyme Disease Cases in New York",
+       subtitle="This shows the opposite of what is expected: Higher temperatures lead to less cases!",
+       x="Temperature (F)",
+       y="Number of Lyme Disease Cases",
+       caption="Source: CDC and NOAA")
+
+#ggsave("NewYLy.png",plot=NewYLy)
+```
+
+```{r echo=FALSE}
+#Images
+
+include_graphics("images/PenLy.png")
+include_graphics("images/NewJLy.png")
+include_graphics("images/NewYLy.png")
+include_graphics("images/NatLy.png")
+```
+

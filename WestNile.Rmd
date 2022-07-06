@@ -1,7 +1,6 @@
 ---
-title: "Temperature"
+title: "West Nile Disease"
 output: html_document
-date: '2022-07-03'
 ---
 
 ```{r setup, include=FALSE}
@@ -13,9 +12,12 @@ library(readxl)
 library(dbplyr)
 library(janitor)
 library(data.table)
+library(usethis)
+library(distill)
+library(knitr)
 ```
 
-```{r}
+```{r echo=FALSE}
 #Setting up the Data
 
 WN<-read_xlsx(path="WestNile.xlsx",
@@ -24,7 +26,7 @@ WN<-read_xlsx(path="WestNile.xlsx",
   filter(state%in%c("National","California","Texas","Colorado","Nebraska","Illinois"))
 
 Temp<-read_xlsx(path="WestNile.xlsx",
-           sheet=2) |> 
+           sheet=3) |> 
   clean_names() |> 
   filter(state%in%c("National","California","Texas","Colorado","Nebraska","Illinois"))
 
@@ -35,16 +37,17 @@ Tempdf<-as.data.frame(t(Temp)) |>
 colnames(WNdf)<-c("California","Colorado","Illinois","Nebraska","Texas","National")
 colnames(Tempdf)<-c("California","Colorado","Illinois","Nebraska","Texas","National")
 
-WN
-Temp
-WNdf
-Tempdf
+#WN
+#Temp
+#WNdf
+#Tempdf
 ```
 
-```{r}
+```{r echo=FALSE}
 #Cleaning the Data
 
-data<-full_join(WN,Temp)
+data<-full_join(WN,Temp,by = c("state", "x1999", "x2000", "x2001", "x2002", "x2003", "x2004", "x2005", "x2006", "x2007", "x2008", "x2009", "x2010", "x2011",
+"x2012", "x2013", "x2014", "x2015", "x2016", "x2017", "x2018", "x2019", "x2020"))
 clean_data<-transpose(data) |> 
   slice(2:24) |> 
   mutate("Year"=c(1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,
@@ -66,13 +69,13 @@ clean_data$`NebraskaT`<-as.double(clean_data$`NebraskaT`)
 clean_data$`TexasT`<-as.double(clean_data$`TexasT`)
 clean_data$`NationalT`<-as.double(clean_data$`NationalT`)
 
-clean_data[,c(13,1,2,3,4,5,6,7,8,9,10,11,12)] 
+#clean_data[,c(13,1,2,3,4,5,6,7,8,9,10,11,12)] 
 ```
 
-```{r}
+```{r echo=FALSE}
 #California Plot
 
-clean_data |>  
+CalWN<-clean_data |>  
   filter(Year!="Total") |> 
   ggplot(aes(x=CaliforniaT,y=California))+
   geom_point()+
@@ -80,16 +83,19 @@ clean_data |>
               formula=y~x,
               se=FALSE)+
   theme_classic()+
-  labs(title="Annual Average Temperatures in California vs \nNumber of West Nile Cases in California",
-       subtitle="There is a positive correlation between increasing temeprature and higher case numbers\n
-       however it is quite weak",
+  labs(title="Annual Average Temperatures in California vs \nAnnual Number of West Nile Cases in California",
+       subtitle="There is a positive correlation between increasing temeprature and higher case numbers\nhowever it is quite weak.",
        x="Temperature (F)",
-       y="Number of West Nile Disease Cases")
+       y="Number of West Nile Disease Cases",
+       caption="Source: CDC and NOAA")
+
+#ggsave("CalWN.png",plot=CalWN)
 ```
-```{r}
+
+```{r echo=FALSE}
 #Colorado Plot
 
-clean_data |>  
+ColWN<-clean_data |>  
   filter(Year!="Total") |> 
   ggplot(aes(x=ColoradoT,y=Colorado))+
   geom_point()+
@@ -97,16 +103,19 @@ clean_data |>
               formula=y~x,
               se=FALSE)+
   theme_classic()+
-  labs(title="Annual Average Temperatures in California vs \nNumber of West Nile Cases in California",
-       subtitle="There is a positive correlation between increasing temeprature and higher case numbers\n
-       however it is quite weak",
+  labs(title="Annual Average Temperatures in Colorado vs \nAnnual Number of West Nile Cases in Colorado",
+       subtitle="There is a very slight positive correlation between increasing temeprature and higher case numbers\nhowever there seems to be no significant correlation overall.",
        x="Temperature (F)",
-       y="Number of West Nile Disease Cases")
+       y="Number of West Nile Disease Cases",
+       caption="Source: CDC and NOAA")
+
+#ggsave("ColWN.png",plot=ColWN)
 ```
-```{r}
+
+```{r echo=FALSE}
 #Texas Plot
 
-clean_data |>  
+TexWN<-clean_data |>  
   filter(Year!="Total") |> 
   ggplot(aes(x=TexasT,y=Texas))+
   geom_point()+
@@ -114,16 +123,19 @@ clean_data |>
               formula=y~x,
               se=FALSE)+
   theme_classic()+
-  labs(title="Annual Average Temperatures in California vs \nNumber of West Nile Cases in California",
-       subtitle="There is a positive correlation between increasing temeprature and higher case numbers\n
-       however it is quite weak",
+  labs(title="Annual Average Temperatures in Texas vs \nAnnaul Number of West Nile Cases in Texas",
+       subtitle="There is a positive correlation between increasing temeprature and higher case numbers\nhowever it is weak",
        x="Temperature (F)",
-       y="Number of West Nile Disease Cases")
+       y="Number of West Nile Disease Cases",
+       caption="Source: CDC and NOAA")
+
+#ggsave("TexWN.png",plot=TexWN)
 ```
-```{r}
+
+```{r echo=FALSE}
 #National Plot
 
-clean_data |>  
+NatWN<-clean_data |>  
   filter(Year!="Total") |> 
   ggplot(aes(x=NationalT,y=National))+
   geom_point()+
@@ -131,10 +143,21 @@ clean_data |>
               formula=y~x,
               se=FALSE)+
   theme_classic()+
-  labs(title="Annual Average Temperatures in California vs \nNumber of West Nile Cases in California",
-       subtitle="There is a positive correlation between increasing temeprature and higher case numbers\n
-       however it is quite weak",
+  labs(title="National Annual Average Temperatures vs \nNational Annual Number of West Nile Cases",
+       subtitle="There is a slight positive correlation between increasing temeprature and higher case numbers\nhowever it is very weak",
        x="Temperature (F)",
-       y="Number of West Nile Disease Cases")
+       y="Number of West Nile Disease Cases",
+       caption="Source: CDC and NOAA")
+
+#ggsave("NatWN.png",plot=NatWN)
+```
+
+```{r echo=FALSE}
+#Images
+
+include_graphics("images/CalWN.png")
+include_graphics("images/ColWN.png")
+include_graphics("images/TexWN.png")
+include_graphics("images/NatWN.png")
 ```
 

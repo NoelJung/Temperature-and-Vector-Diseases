@@ -1,0 +1,16 @@
+name: "."
+title: "West Nile Disease"
+description: |
+  West Nile Disease
+output_dir: "docs"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "West Nile Disease"
+      href: WestNile.html
+    - text: "Lyme Disease"
+      href: Lyme.html
+output: distill::distill_article

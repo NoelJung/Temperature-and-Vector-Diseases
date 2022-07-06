@@ -1,0 +1,42 @@
+---
+title: "Vector Borne Disease"
+description: |
+  A website on the effects of changing temperature on the spread of Vector Borne Diseases
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Distill at:
+# https://rstudio.github.io/distill/website.html
+
+# Learn more about publishing to GitHub Pages at:
+# https://rstudio.github.io/distill/publish_website.html#github-pages
+
+```
+
+## Introduction
+
+West Nile and Lyme Disease are both examples of vector borne diseases. Vector borne diseases are diseases that are transmitted by the bite of an infected animal. Specifically for West Nile and Lyme, a mosquito bite and a tick bite respectively are capable of transmitting the virus into a human host to cause the disease.
+
+However, both mosquitoes and ticks are sensitive to their environment. Specifically, changing temperature can change how well mosquitoes or ticks are able to survive and thrive. This changes the number of active mosquitoes or ticks that can transmit these viruses, thus impacting the number of cases that appear. In this website, I will try to explore this relationship by comparing annual average temperatures the number of cases of each disease in the US.
+
+### West Nile Disease
+
+West Nile Disease is spread by mosquito bites. Specifically for mosquitoes, higher temperatures creates optimal conditions for them to thrive, allowing them to:\n
+
+* Remain active for more parts of the year
+* Develop at a faster rate to reach full adulthood
+
+These conditions allow mosquitoes to proliferate earlier and for longer periods of time. This gives mosquitoes more opportunities to spread the West Nile Virus, thus increasing the number of cases.
+
+Of course, this is how this is supposed to work on paper. In reality, there are a multitude of other variables that are contribute to how well mosquitoes are able to transmit West Nile, something which can be seen and is explained in the West Nile Disease section of this website.
+
+### Lyme Disease
+
+Comparatively, Lyme Disease is spread by tick bites. While higher temperatures are great for mosquitoes, they are not ideal for ticks. Specifically, the black-legged tick, the type of tick that spreads Lyme Disease, high temperatures cause them to become less active as they prefer cooler temperatures, typically between 4 and 25 degrees Celsius (39.2 to 77 degrees Fahrenheit).
+
+Therefore, higher temperatures can both be beneficial and detrimental for ticks. Higher temperatures in cold areas, can create a climate ideal for ticks to survive thus increasing their ability to spread Lyme Disease. However higher temperatures in warm areas can create overly hot climates that can reduce tick activity, reducing their ability to spread Lyme Disease.
+
+Again however, this is only how it works on paper. In reality, other variables are also at play which change how well ticks are able to thrive in a given area, something which can be seen and is explained in the Lyme Disease section of this website.
