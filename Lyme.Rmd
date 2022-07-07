@@ -147,12 +147,12 @@ As stated in the home page, higher temperatures can improve tick activity, howev
 
 This of course is not at all what is actually seen in the graphs below. Similar to the West Nile Disease graphs, the CDC only had data from 2010 to 2019, meaning only these years were considered. Annual average temperature data was collected from the NOAA and annual number of Lyme Disease cases were collected from the CDC. The relationship between these two variables was investigated in the three states with the highest number of Lyme Disease cases, Pennsylvania, New York and New Jersey, and at a national level as well. Through these graphs we can see that the effect of temperature on Lyme Disease cases varies wildly!
 
-```{r fig.align="center"}
+```{r echo=FALSE fig.align="center"}
 #Images
 
-include_graphics("images/PenLy.png")
-include_graphics("images/NewJLy.png")
-include_graphics("images/NewYLy.png")
-include_graphics("images/NatLy.png")
+include_graphics("Images/PenLy.png")
+include_graphics("Images/NewJLy.png")
+include_graphics("Images/NewYLy.png")
+include_graphics("Images/NatLy.png")
 ```
 
