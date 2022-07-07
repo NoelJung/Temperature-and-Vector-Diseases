@@ -150,9 +150,9 @@ This of course is not at all what is actually seen in the graphs below. Similar 
 ```{r echo=FALSE}
 #Images
 
-include_graphics("images/PenLy.png")
-include_graphics("images/NewJLy.png")
-include_graphics("images/NewYLy.png")
-include_graphics("images/NatLy.png")
+include_graphics("Images/PenLy.png")
+include_graphics("Images/NewJLy.png")
+include_graphics("Images/NewYLy.png")
+include_graphics("Images/NatLy.png")
 ```
 

@@ -160,8 +160,8 @@ The graphs below use average annual temperature data collected by the National O
 ```{r echo=FALSE}
 #Images
 
-include_graphics("images/CalWN.png")
-include_graphics("images/ColWN.png")
-include_graphics("images/TexWN.png")
-include_graphics("images/NatWN.png")
+include_graphics("Images/CalWN.png")
+include_graphics("Images/ColWN.png")
+include_graphics("Images/TexWN.png")
+include_graphics("Images/NatWN.png")
 ```
