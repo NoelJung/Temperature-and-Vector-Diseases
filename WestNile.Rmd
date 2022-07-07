@@ -151,6 +151,11 @@ NatWN<-clean_data |>
 
 #ggsave("NatWN.png",plot=NatWN)
 ```
+## Introduction
+
+As stated on the home page, higher temperatures would be expected to cause a higher number of West Nile disease cases as they allow mosquitoes to become more prevalent. However, this is not supported by the trends shown in the graphs below.
+
+The graphs below use average annual temperature data collected by the National Oceanic and Atmospheric Administration against the annual number of West Nile disease cases. The CDC contained West Nile Disease data from 1999 to 2020, meaning only these years were considered. The annual temperature and case numbers were compared in the states of California, Colorado and Texas as they had the top three highest number of West Nile cases. A comparison between the national annual temperature the national annual number of West Nile cases was also made in a final, fourth graph. Through these graphs we can see that the relationship between temperature and West Nile cases is not as simplistic as it is on paper!
 
 ```{r echo=FALSE}
 #Images
@@ -160,4 +165,3 @@ include_graphics("images/ColWN.png")
 include_graphics("images/TexWN.png")
 include_graphics("images/NatWN.png")
 ```
-

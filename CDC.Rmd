@@ -1,0 +1,15 @@
+---
+title: "Sources"
+output: html_document
+date: '2022-07-07'
+bibliography: bibliography.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The Centre of Disease Control (CDC) is a government run organization that collects data and monitors health concerns for the nation including pathogens, foods and more. Its goal is to control the spread of infectious diseases and promote health for all.
+
+You can learn more about the CDC on their website at <https://www.cdc.gov/>.
+[@CDC]

@@ -1,0 +1,16 @@
+---
+title: "NOAA"
+output: html_document
+date: '2022-07-07'
+bibliography: bibliography.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The National Oceanic and Atmospheric Administration (NOAA) collects data on weather patterns, monitors the climate and provides support for environmental protection and restoration. Their goal is better understand the natural world and help protect it using science.
+
+You can learn more about the NOAA on their website at <https://www.noaa.gov/about-our-agency>.
+
+@NOAA

@@ -856,9 +856,20 @@ $(document).ready(function () {
 </div>
 <div class="nav-right">
 <a href="index.html">Home</a>
-<a href="about.html">About</a>
 <a href="WestNile.html">West Nile Disease</a>
 <a href="Lyme.html">Lyme Disease</a>
+<a href="about.html">Other Variables</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Sources
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="CDC.html">CDC</a>
+<a href="NOAA.html">NOAA</a>
+</div>
+</div>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
 </nav>
@@ -886,13 +897,28 @@ $(document).ready(function () {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="about.html">About</a>
-</li>
-<li>
   <a href="WestNile.html">West Nile Disease</a>
 </li>
 <li>
   <a href="Lyme.html">Lyme Disease</a>
+</li>
+<li>
+  <a href="about.html">Other Variables</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Sources
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="CDC.html">CDC</a>
+    </li>
+    <li>
+      <a href="NOAA.html">NOAA</a>
+    </li>
+  </ul>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -908,7 +934,25 @@ $(document).ready(function () {
 </div>
 
 
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>As stated on the home page, higher temperatures would be expected to
+cause a higher number of West Nile disease cases as they allow
+mosquitoes to become more prevalent. However, this is not supported by
+the trends shown in the graphs below.</p>
+<p>The graphs below use average annual temperature data collected by the
+National Oceanic and Atmospheric Administration against the annual
+number of West Nile disease cases. The CDC contained West Nile Disease
+data from 1999 to 2020, meaning only these years were considered. The
+annual temperature and case numbers were compared in the states of
+California, Colorado and Texas as they had the top three highest number
+of West Nile cases. A comparison between the national annual temperature
+the national annual number of West Nile cases was also made in a final,
+fourth graph. Through these graphs we can see that the relationship
+between temperature and West Nile cases is not as simplistic as it is on
+paper!</p>
 <p><img src="images/CalWN.png" width="1050" /><img src="images/ColWN.png" width="1050" /><img src="images/TexWN.png" width="1050" /><img src="images/NatWN.png" width="1050" /></p>
+</div>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
