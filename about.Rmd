@@ -1,58 +1,25 @@
 ---
-title: "Other Variables"
+title: "About Me"
 description: |
-  Why does temperature not have the effect as predicted on vector borne diseases?
+  An Overview of My Project
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-library(tidyverse)
-library(ggplot2)
-library(ggthemes)
-library(readxl)
-library(dbplyr)
-library(janitor)
-library(data.table)
-library(usethis)
-library(distill)
-library(knitr)
-```
+## About Me
 
-Why does temperature not affect the number of West Nile and Lyme disease cases? Mainly because there are a multitude of other factors at play that also affect how well these diseases can proliferate.
+My Name is Noel Jung and I am a Bachelor of Health Sciences Student at Queens University. I enjoy swimming and reading. This is my first experience coding in R and in data science.
 
-## Factors Affecting How Well Ticks and Mosquitoes Can Infect People
+Email: noeljjung@gmail.com
 
-While temperature is a crucial factor to how well ticks and mosquitoes can thrive, there are other factors to consider such as:
+## About the Project
 
-* Precipitation
-  + Ticks prefer humid environments and mosquitoes need wet areas to lay eggs and reproduce
-  + Precipitation levels can thus change the population of ticks and mosquitoes in a given area meaning the rate at which ticks and mosquitoes can transmit West Nile or Lyme Disease is affected
-* Human Behaviour
-  + Wearing bug spray, long sleeves and pants, or just staying inside are all ways humans limit the ability of ticks and mosquitoes to bite and transmit West Nile or Lyme Disease
-* Population Density
-  + Ticks generally remain in wooded, forest areas and mosquitoes typically remain in areas where there is lots of stagnant water to lay eggs
-  + If there is a lack of people around these areas, the rate at which ticks and mosquitoes can bite and thus transmit West Nile or Lyme Disease changes
+My final project investigates if changes in an increase in temperature is correlated with an increase in the number of West Nile and Lyme Disease cases. More about this topic can be seen on the home page. I chose this project because I wanted to pursue this topic for an old project, however I lacked the skill to conduct it properly. I wanted to try again with this website and with my newfound skills in coding and data science.
 
-## Factors Affecting How Well West Nile and Lyme Disease Can Proliferate
+## Link to my Github Repository for my Wesbite
 
-One other factor we have not considered is the way West Nile Disease or Lyme Disease can infect a mosquito or tick in the first place.
+<https://github.com/NoelJung/Temperature-and-Vector-Diseases>
 
-Mosquitoes typically become infected with West Nile Disease from birds. Specifically, if they feed from a bird that has West Nile Disease in its blood, the virus will transmit to the mosquito. If that mosquito then bites a human, the virus can then transmit to the person thus causing West Nile Disease.
+## Credits
 
-```{r fig.align="center"}
-include_graphics("images/west_nile_graphic.png")
-```
-**Figure 3: Graphic Showing how the West Nile Virus Transfers from Bird to Mosquito to Human**
+I learned how to code in R through Dr. David Kane's data science course. The website to the course can be found here:
 
-The process in which ticks get infected is much the same. There is no specific animal that ticks can contract the bacteria causing Lyme Disease from, however if it bites onto an infected animal, the bacteria can latch to the tick. If the tick then bites a human, the bacteria can infect that person causing Lyme Disease.
-
-However, changing conditions can affect how well mosquitoes and ticks are able to feed off of infected animals in the first place. For example in the case of West Nile disease, the most common type of bird that mosquitoes become infected from are birds from the Passeriforme order. Changing temperatures, precipitation and habitat conditions can result in changes to migratory patters, wintering groups and general behaviour of these birds. This changes the presence of Passeriforme birds in a given area, thus affecting how well a mosquito is able to become infected with West Nile to spread in the first place.
-
-```{r fig.align="center"}
-include_graphics("images/passeriformes.jpeg")
-```
-**Figure 4: Picture of Common Passeriforme Birds**
-
-By preventing ticks or mosquitoes from becoming infected in the first place, changing conditions can affect how well West Nile or Lyme Disease is able to spread to people.
-
-Therefore, in reality there are a multitude of other variables at play that affect how well ticks and mosquitoes are able to spread Lyme and West Nile Disease respectively. While temperature certainly does play a role, it is only one part of the puzzle and there are other factors to consider.
+<https://bootcamp.davidkane.info/>

@@ -7,12 +7,14 @@ navbar:
   right:
     - text: "Home"
       href: index.html
+    - text: "About"
+      href: about.html
     - text: "West Nile Disease"
       href: WestNile.html
     - text: "Lyme Disease"
       href: Lyme.html
     - text: "Other Variables"
-      href: about.html
+      href: Other_Variables.html
     - text: "Sources"
       menu:
         - text: "CDC"

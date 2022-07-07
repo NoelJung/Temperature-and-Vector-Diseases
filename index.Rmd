@@ -14,6 +14,16 @@ knitr::opts_chunk$set(echo = FALSE)
 # Learn more about publishing to GitHub Pages at:
 # https://rstudio.github.io/distill/publish_website.html#github-pages
 
+library(tidyverse)
+library(ggplot2)
+library(ggthemes)
+library(readxl)
+library(dbplyr)
+library(janitor)
+library(data.table)
+library(usethis)
+library(distill)
+library(knitr)
 ```
 
 ## Introduction
